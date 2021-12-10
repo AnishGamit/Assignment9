@@ -11,25 +11,28 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    let myimgv:UIImageView={
-        let img=UIImageView()
+    let myimgv:UIImageView = {
+        let img = UIImageView()
         img.image = UIImage(named: "flower.jpg")
-        img.isUserInteractionEnabled = true
+        img.clipsToBounds = true
         img.frame=CGRect(x: 100, y: 100, width: 200, height: 200)
         return img
     }()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         view.addSubview(myimgv)
         
-        let tapgesture=UITapGestureRecognizer(target:self,action: #selector(tappedImg))
+        myimgv.isUserInteractionEnabled = true
+        
+       let tapgesture=UITapGestureRecognizer(target:self,action: #selector(tappedImg))
         tapgesture.numberOfTapsRequired=1
         tapgesture.numberOfTouchesRequired=1
         myimgv.addGestureRecognizer(tapgesture)
         
-        let pinchgesture=UIPinchGestureRecognizer(target:self,action: #selector(pinchImg))
+        /*let pinchgesture=UIPinchGestureRecognizer(target:self,action: #selector(pinchImg))
         myimgv.addGestureRecognizer(pinchgesture)
         
         let rotationgesture=UIRotationGestureRecognizer(target: self, action:#selector(rotateImg))
@@ -52,9 +55,15 @@ class ViewController: UIViewController {
         view.addGestureRecognizer(dswipe)
         
         let pangesture=UIPanGestureRecognizer(target: self, action: #selector(panImg))
-        view.addGestureRecognizer(pangesture)
+        view.addGestureRecognizer(pangesture)*/
         
     }
+    
+    /*override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        myimgv.frame = CGRect(x: 100, y: 100, width: 200, height: 200)
+    }*/
     
     
 }
@@ -64,7 +73,7 @@ extension ViewController{
         performSegue(withIdentifier: "segue", sender: self)
     }
     
-    @objc private func pinchImg(gesture: UIPinchGestureRecognizer) {
+    /*@objc private func pinchImg(gesture: UIPinchGestureRecognizer) {
         myimgv.transform=CGAffineTransform(scaleX: gesture.scale, y: gesture.scale)
     }
     @objc private func rotateImg(gesture: UIRotationGestureRecognizer) {
@@ -91,5 +100,5 @@ extension ViewController{
         let x = gesture.location(in: view).x
         let y = gesture.location(in: view).y
         myimgv.center=CGPoint(x: x, y: y)
-    }
+    }*/
 }
